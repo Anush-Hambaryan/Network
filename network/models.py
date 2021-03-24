@@ -7,12 +7,9 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, null=True, blank=True, related_name="profile")
-    following = models.ManyToManyField(
-        User, blank=True, related_name="user_following")
-    follower = models.ManyToManyField(
-        User, blank=True, related_name="user_follower")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True, related_name="profile")
+    following = models.ManyToManyField(User, blank=True, related_name="user_following")
+    follower = models.ManyToManyField(User, blank=True, related_name="user_follower")
 
     def serialize(self):
         return {
@@ -24,8 +21,7 @@ class Profile(models.Model):
 
 
 class Post(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="posts")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
     post = models.TextField()
     likes = models.ManyToManyField(User, blank=True, related_name="likes")
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -42,10 +38,8 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE,
-                             related_name="user_comments")
-    post = models.ForeignKey(Post, on_delete=models.CASCADE,
-                             related_name="post_comments")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_comments")
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="post_comments")
     comment = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
 
