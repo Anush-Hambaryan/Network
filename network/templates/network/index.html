@@ -1,0 +1,28 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<div id="view-1"> 
+    {% if user.is_authenticated %}
+    <div id="new-post-background" >
+        <div id="new-post-field">
+            <h6>New Post</h6>
+            <form id="new-post">
+                <span id="post-textarea" contenteditable="true" autofocus ></span>
+                <input type="submit" value="Submit" class="btn btn-sm btn-outline-secondary">
+            </form>
+        </div>
+    </div>
+    {% endif %}
+</div>  
+
+<div id="view-2">
+    
+</div>
+
+<div id="view-3">
+
+</div> 
+
+
+{% endblock %}

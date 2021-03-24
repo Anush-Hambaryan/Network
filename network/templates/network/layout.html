@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+        <script type="module" src="{% static 'network/script.js' %}"></script>
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+        <title>Network</title>
+    </head>
+    <body>
+
+        <ul class="nav justify-content-center">
+        {% if user.is_authenticated %}
+            <li class="nav-item nav-style">
+                <a class="nav-link" href="javascript:void(0);" id="username" >{{ user.username }}</a>
+            </li>
+        {% endif %}
+            <li class="nav-item nav-style" id="all-posts">
+                <a class="nav-link" href="javascript:void(0);">ALL POSTS</a>
+            </li>
+        {% if user.is_authenticated %}
+            <li class="nav-item nav-style" id="following">
+                <a class="nav-link" href="javascript:void(0);">FOLLOWING</a>
+            </li>
+            <li class="nav-item nav-style">
+                <a class="nav-link" id="log-out" href="{% url 'logout' %}">LOG OUT</a>
+            </li>
+        {% else %}
+            <li class="nav-item nav-style">
+                <a class="nav-link" id="log-in" href="{% url 'login' %}">LOG IN</a>
+            </li> 
+            <li class="nav-item nav-style">
+                <a class="nav-link" id="register" href="{% url 'register' %}">REGISTER</a>
+            </li>
+        {% endif %}
+        </ul>
+
+        <div class="body">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
